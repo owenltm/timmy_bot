@@ -5,7 +5,7 @@ const { Client } = require('discord.js');
 const client = new Client();
 const PREFIX = "Timmy ";
 
-const timmy = require('./timmy.js');
+const timmy = require('./timmy');
 
 client.on('ready', () => {
   console.log(`${client.user.tag} has logged in`);
@@ -20,16 +20,26 @@ client.on('message', (message) => {
     /* console.log(CMD_NAME);
     console.log(args); */
 
-    if(timmy[CMD_NAME]){
-      // timmy[CMD_NAME].fun(message);
-      const coms = timmy[CMD_NAME];
+    if(CMD_NAME === "help"){
+      const keys = Object.keys(timmy);
 
-      coms.fun(message);
+      if(args.length === 0){
+        var result = "";
+
+        keys.forEach((keys) => {
+          result += `${keys} - ${timmy[keys].desc}\n`;
+        });
+
+        message.channel.send(result);
+      }
+
+    } else if(timmy[CMD_NAME]){
+      const cmd = timmy[CMD_NAME];
+
+      cmd.fun(message, args);
+    } else {
+      message.channel.send("Sorry, i don't know hot to respond to that :(")
     }
-
-    /* if(CMD_NAME == "flipacoin"){
-      timmy.flipacoin.fun(message);
-    } */
   }
 });
 
