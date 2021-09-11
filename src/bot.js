@@ -1,9 +1,11 @@
 // ENTRY POINT
 require('dotenv').config();
 
-const { Client, Intents } = require('discord.js');
+const { Client } = require('discord.js');
 const client = new Client();
 const PREFIX = "Timmy ";
+
+const timmy = require('./timmy.js');
 
 client.on('ready', () => {
   console.log(`${client.user.tag} has logged in`);
@@ -20,11 +22,13 @@ client.on('message', (message) => {
 
     if(CMD_NAME == "flipacoin"){
 
-      const random = (Math.random() * 10) % 2;
+      timmy.flipacoin.fun(message);
+
+      /* const random = (Math.random() * 10) % 2;
 
       const result = random == 0 ? "head" : "tails";
 
-      message.channel.send(`${message.member} ${result}`);
+      message.channel.send(`${message.member} ${result}`); */
     }
   }
 });
