@@ -20,16 +20,16 @@ client.on('message', (message) => {
     /* console.log(CMD_NAME);
     console.log(args); */
 
-    if(CMD_NAME == "flipacoin"){
+    if(timmy[CMD_NAME]){
+      // timmy[CMD_NAME].fun(message);
+      const coms = timmy[CMD_NAME];
 
-      timmy.flipacoin.fun(message);
-
-      /* const random = (Math.random() * 10) % 2;
-
-      const result = random == 0 ? "head" : "tails";
-
-      message.channel.send(`${message.member} ${result}`); */
+      coms.fun(message);
     }
+
+    /* if(CMD_NAME == "flipacoin"){
+      timmy.flipacoin.fun(message);
+    } */
   }
 });
 

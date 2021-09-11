@@ -1,3 +1,5 @@
 module.exports = {
-  flipacoin: require("./flipacoin"),
+  introduce : require("./introduce"),
+  help      : require("./help"),
+  flipacoin : require("./flipacoin"),
 }
