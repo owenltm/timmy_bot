@@ -17,20 +17,26 @@ client.on('message', (message) => {
   if(message.content.startsWith(PREFIX)){
     const [CMD_NAME, ...args] = message.content.trim().substring(PREFIX.length).split(" ");
 
-    /* console.log(CMD_NAME);
-    console.log(args); */
+    // console.log(CMD_NAME);
+    // console.log(args);
 
     if(CMD_NAME === "help"){
-      const keys = Object.keys(timmy);
-
+      
       if(args.length === 0){
         var result = "";
+        
+        const keys = Object.keys(timmy);
 
         keys.forEach((keys) => {
-          result += `${keys} - ${timmy[keys].desc}\n`;
+          result += `**${keys}** - ${timmy[keys].desc}\n`;
         });
 
         message.channel.send(result);
+      } else if(args.length == 1){
+        const key = args[0];
+        if(timmy[key]){
+          message.channel.send(`${key} - *${timmy[key].howto}*`);
+        }
       }
 
     } else if(timmy[CMD_NAME]){
