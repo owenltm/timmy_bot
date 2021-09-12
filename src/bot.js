@@ -9,10 +9,17 @@ const timmy = require('./timmy');
 
 client.on('ready', () => {
   console.log(`${client.user.tag} has logged in`);
+
+  client.user.setActivity('Timmy', { type: 'LISTENING' })
+  .catch(console.error);
 });
 
 client.on('message', (message) => {
   if(message.author.bot) return;
+
+  if(message.content === "Timmy"){
+    message.channel.send("Ask *Timmy whatcanyoudo* *wink *wink");
+  }
   
   if(message.content.startsWith(PREFIX)){
     const [CMD_NAME, ...args] = message.content.trim().substring(PREFIX.length).split(" ");
@@ -20,26 +27,30 @@ client.on('message', (message) => {
     // console.log(CMD_NAME);
     // console.log(args);
 
-    if(CMD_NAME === "help"){
+    if(CMD_NAME === "whatcanyoudo"){
       
-      if(args.length === 0){
-        var result = "";
-        
-        const keys = Object.keys(timmy);
+      var result = "";
+      
+      const keys = Object.keys(timmy);
 
-        keys.forEach((keys) => {
-          result += `**${keys}** - ${timmy[keys].desc}\n`;
-        });
+      keys.forEach((keys) => {
+        result += `**${keys}** - ${timmy[keys].desc}\n`;
+      });
 
-        message.channel.send(result);
-      } else if(args.length == 1){
+      message.channel.send(result);
+    } else if(CMD_NAME === "howto"){
+      if(args.length == 1){
         const key = args[0];
         if(timmy[key]){
-          message.channel.send(`${key} - *${timmy[key].howto}*`);
+          message.channel.send(`${key} - do *${timmy[key].how}*`);
+        } else {
+          message.channel.send("Sorry, i dont know how to do that :(");
         }
       }
-
     } else if(CMD_NAME === "goodbye"){
+
+      console.log("Goodbye");
+
       client.destroy();
     } else if(timmy[CMD_NAME]){
       const cmd = timmy[CMD_NAME];

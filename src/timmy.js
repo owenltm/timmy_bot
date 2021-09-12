@@ -3,20 +3,16 @@ const functions = require("./functions/index");
 const timmy = {
   "introduce" : {
     desc    : "Let timmy to introduce himself",
-    howto   : "Timmy introduce",
+    how     : "Timmy introduce",
     fun     : functions.introduce
   },
-  "help" : {
-    desc    : "Ask Timmy how to play",
-    howto   : "Timmy help [command]",
-  },
-  "goodbye" : {
-    desc    : "Get Timmy to bed",
-    howto   : "Timmy goodbye",
+  "howto" : {
+    desc    : "Ask Timmy how to do anything",
+    how     : "Timmy howto [command]",
   },
   "flipacoin" : {
     desc    : "Ask timmy to flip a coin",
-    howto   : "Timmy flipacoin",
+    how     : "Timmy flipacoin",
     fun     : functions.flipacoin 
   }
 };
