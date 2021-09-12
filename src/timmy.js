@@ -9,7 +9,10 @@ const timmy = {
   "help" : {
     desc    : "Ask Timmy how to play",
     howto   : "Timmy help [command]",
-    fun     : functions.help
+  },
+  "goodbye" : {
+    desc    : "Get Timmy to bed",
+    howto   : "Timmy goodbye",
   },
   "flipacoin" : {
     desc    : "Ask timmy to flip a coin",

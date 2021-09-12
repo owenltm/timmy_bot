@@ -39,6 +39,8 @@ client.on('message', (message) => {
         }
       }
 
+    } else if(CMD_NAME === "goodbye"){
+      client.destroy();
     } else if(timmy[CMD_NAME]){
       const cmd = timmy[CMD_NAME];
 
