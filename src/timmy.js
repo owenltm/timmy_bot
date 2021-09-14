@@ -14,6 +14,11 @@ const timmy = {
     desc    : "Ask timmy to flip a coin",
     how     : "Timmy flipacoin",
     fun     : functions.flipacoin 
+  },
+  "rockpaperscissors" : {
+    desc    : "Play rock paper scissors with Timmy",
+    how     : "Timmy rockpaperscissors [rock/paper/scissors]",
+    fun     : functions.rockpaperscissors 
   }
 };
 

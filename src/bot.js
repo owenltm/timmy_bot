@@ -18,7 +18,7 @@ client.on('message', (message) => {
   if(message.author.bot) return;
 
   if(message.content === "Timmy"){
-    message.channel.send("Ask *Timmy whatcanyoudo* *wink *wink");
+    message.channel.send("Ask ***Timmy whatcanyoudo*** *wink *wink");
   }
   
   if(message.content.startsWith(PREFIX)){
