@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+// Custom colors
+$primary: #CEFA05;
+$secondary: #A7AB94;
+$dark: #1D211B;
+
+// Custom font
+$font-family-montserrat: 'Montserrat', sans-serif;
+
+// Navbar custom shadow
+$box-shadow-sm:     0 .125rem .25rem rgba($primary, .075);
+
+@import "../node_modules/bootstrap/scss/_functions";
+@import "../node_modules/bootstrap/scss/_variables";
+@import "../node_modules/bootstrap/scss/utilities";
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "font-family": (
+      property: font-family,
+      class: font,
+      values: (montserrat: $font-family-montserrat)
+    ),
+  )
+);
+
+// import bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap";
