@@ -3,14 +3,14 @@ require('dotenv').config();
 
 const { Client } = require('discord.js');
 const client = new Client();
-const PREFIX = "Timmy ";
+const PREFIX = "T-";
 
 const timmy = require('./timmy');
 
 client.on('ready', () => {
   console.log(`${client.user.tag} has logged in`);
 
-  client.user.setActivity('Timmy', { type: 'LISTENING' })
+  client.user.setActivity('T-help', { type: 'LISTENING' })
   .catch(console.error);
 });
 
@@ -18,11 +18,11 @@ client.on('message', (message) => {
   if(message.author.bot) return;
 
   if(message.content === "Timmy"){
-    message.channel.send("Ask ***Timmy whatcanyoudo*** *wink *wink");
+    message.channel.send("Ask ***T-whatcanyoudo*** *wink *wink");
   }
   
   if(message.content.startsWith(PREFIX)){
-    const [CMD_NAME, ...args] = message.content.trim().substring(PREFIX.length).split(" ");
+    const [CMD_NAME, ...args] = message.content.trim().substring(PREFIX.length).split(/\s+/);
 
     // console.log(CMD_NAME);
     // console.log(args);
@@ -42,7 +42,7 @@ client.on('message', (message) => {
       if(args.length == 1){
         const key = args[0];
         if(timmy[key]){
-          message.channel.send(`${key} - do *${timmy[key].how}*`);
+          message.channel.send(`For ${key} do *${PREFIX}${timmy[key].how}*`);
         } else {
           message.channel.send("Sorry, i dont know how to do that :(");
         }
