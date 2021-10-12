@@ -48,10 +48,7 @@ client.on('message', (message) => {
         }
       }
     } else if(CMD_NAME === "goodbye"){
-
-      console.log("Goodbye");
-
-      client.destroy();
+      message.channel.send("Goodbye").then((message) => client.destroy());
     } else if(timmy[CMD_NAME]){
       const cmd = timmy[CMD_NAME];
 

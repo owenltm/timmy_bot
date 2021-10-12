@@ -19,6 +19,11 @@ const timmy = {
     desc    : "Play rock paper scissors with Timmy",
     how     : "rockpaperscissors [rock/paper/scissors]",
     fun     : functions.rockpaperscissors 
+  },
+  "init" : {
+    desc    : "Initialize timmy's world",
+    how     : "init",
+    fun     : functions.init
   }
 };
 
