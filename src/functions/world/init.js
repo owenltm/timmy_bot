@@ -1,7 +1,7 @@
 const { database } = require("../../firebase/database");
 
 const init = (message) => {
-  console.log(message.guild.id);
+  const guildId = message.guild.id;
 }
 
 module.exports = init

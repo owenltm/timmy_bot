@@ -1,17 +1,14 @@
 const app = require('./config');
-const { getDatabase, ref, set } = require ('firebase/database');
+const { getDatabase, ref, set, get } = require ('firebase/database');
 
 const database = getDatabase(app);
 
-const testRef = ref(database, 'test');
-
-const testDB = (str) => {
-  set(testRef, {
-    value: str
-  });
+const getReference = (path) => {
+  return ref(database, path);
 }
 
 module.exports = {
   database,
-  testDB
+  set,
+  get
 }

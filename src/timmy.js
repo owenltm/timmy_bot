@@ -20,11 +20,17 @@ const timmy = {
     how     : "rockpaperscissors [rock/paper/scissors]",
     fun     : functions.rockpaperscissors 
   },
+  // World
   "init" : {
     desc    : "Initialize timmy's world",
     how     : "init",
     fun     : functions.init
-  }
+  },
+  "register" : {
+    desc    : "Register to play timmy's world",
+    how     : "register",
+    fun     : functions.register
+  },
 };
 
 module.exports = timmy;
