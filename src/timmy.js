@@ -40,6 +40,11 @@ const timmy = {
     desc    : "See available quest",
     how     : "quest [take <quest number>]",
     fun     : functions.quest
+  },
+  "fishing" : {
+    desc    : "Go fishing",
+    how     : "fishing",
+    fun     : functions.fishing
   }
 };
 

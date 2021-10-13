@@ -1,5 +1,3 @@
-const register = require("./world/register");
-
 module.exports = {
   introduce : require("./introduce"),
   flipacoin : require("./flipacoin"),
@@ -9,4 +7,5 @@ module.exports = {
   register : require("./world/register"),
   profile : require("./world/profile"),
   quest : require("./world/quest"),
+  fishing : require("./world/fishing")
 }

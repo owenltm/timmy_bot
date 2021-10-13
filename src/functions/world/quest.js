@@ -3,17 +3,20 @@ const { ref, set, get, push, remove, child } = require ('firebase/database');
 
 const { MessageEmbed } = require('discord.js');
 
-const quest = (message, args) => {
+const quest = async (message, args) => {
 
   const guildId = message.guild.id;
   const memberId = message.member.id;
 
   const playersRef = ref(database, guildId + "/players/");
   const questsRef = ref(database, guildId + "/quests/");
-
   const memberRef = child(playersRef, memberId + "");
 
-  // TODO: Player Validation
+  const snapshot = await get(child(playersRef, memberId + ""))
+  if(!snapshot.exists()){
+    message.reply("You are not registered\nyou can register using `T-register`");
+    return;
+  }
 
   if(args[0] == null){
     get(questsRef).then((snapshot) => {
