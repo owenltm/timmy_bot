@@ -31,6 +31,16 @@ const timmy = {
     how     : "register",
     fun     : functions.register
   },
+  "profile" : {
+    desc    : "View profile on timmy's world",
+    how     : "profile",
+    fun     : functions.profile
+  },
+  "quest" : {
+    desc    : "See available quest",
+    how     : "quest [take <quest number>]",
+    fun     : functions.quest
+  }
 };
 
 module.exports = timmy;

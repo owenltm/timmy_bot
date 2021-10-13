@@ -7,4 +7,6 @@ module.exports = {
   // World
   init : require("./world/init"),
   register : require("./world/register"),
+  profile : require("./world/profile"),
+  quest : require("./world/quest"),
 }

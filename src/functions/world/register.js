@@ -1,26 +1,51 @@
-const { database } = require("../../firebase/database");
-const { getDatabase, ref, set, get } = require ('firebase/database');
-const dayjs = require('dayjs')
-
-// const types = ['🤖', '🧟‍♂️', '🧙‍♂️'];
+const { database, setData } = require("../../firebase/database");
+const { ref, set, get } = require ('firebase/database');
 
 const types = {
-  '🤖': "Robot",
-  '🧟‍♂️': "Zombie",
-  '🧙‍♂️': "Mage"
+  '🤖': {
+    name: "Robot",
+    stat: {
+      att: 8,   //attack point
+      def: 7,   //defence point
+      spec: 3   //special bonus point
+    }
+  },
+  '👻': {
+    name: "Ghost",
+    stat: {
+      att: 6,
+      def: 4,
+      spec: 8
+    }
+  },
+  '🥷': {
+    name: "Ninja",
+    stat: {
+      att: 7,
+      def: 5,
+      spec: 6
+    }
+  },
+  '🧙‍♂️': {
+    name: "Mage",
+    stat: {
+      att: 4,
+      def: 8,
+      spec: 6
+    }
+  }
 }
 
 const keys = Object.keys(types);
+
+
 
 const register = (message) => {
 
   const guildId = message.guild.id;
   const memberId = message.member.id
 
-  const guildRef = ref(database, guildId);
   const playerRef = ref(database, guildId + "/players/" + memberId)
-
-
 
   message.reply("Choose your start class").then((msg) => {
     // put reaction option
@@ -35,30 +60,17 @@ const register = (message) => {
       // Set starting values
       set(playerRef, {
         id: memberId,
-        type: types[r.emoji.name],
+        type: types[r.emoji.name].name,
         level: 1,
-        createdAt: Date.now()
+        coin: 100,
+        createdAt: Date.now(),
+        stat: types[r.emoji.name].stat,
       }).then(() => {
         message.channel.send(`Welcome new player ${r.emoji.name}${message.member.displayName}.Welcome to Timmy's World!`)
       })
     });
     collector.on('end', collected => console.log(`Collected ${collected.size} items`));
   });
-}
-
-const getType = (name) => {
-  switch (name) {
-    case '🤖':
-      return "Robot"
-    case '🧟‍♂️':
-      return "Zombie"
-    case '🧙‍♂️':
-      return "Mage"  
-    default:
-      break;
-  }
-
-  return;
 }
 
 module.exports = register;

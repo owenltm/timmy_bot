@@ -7,8 +7,16 @@ const getReference = (path) => {
   return ref(database, path);
 }
 
+const setData = (ref, data) => {
+  return set(ref, data)
+};
+
+const getData = () => {
+  
+}
+
 module.exports = {
   database,
-  set,
-  get
+  setData,
+  getData
 }
