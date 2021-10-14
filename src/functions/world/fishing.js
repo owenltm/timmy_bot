@@ -1,5 +1,5 @@
 const { database } = require("../../firebase/database");
-const { ref, set, get, push, remove, child } = require ('firebase/database');
+const { ref, set, get, push, remove, child, increment } = require ('firebase/database');
 
 const fishing = async(message) => {
   const guildId = message.guild.id;
@@ -24,14 +24,15 @@ const fishing = async(message) => {
 
       collector.on('collect', r => {
         // on react
-        console.log(`Collected ${r.emoji.name}`);
+        // console.log(`Collected ${r.emoji.name}`);
 
         const n = Math.floor(Math.random() * 2) + 1;
-        message.channel.send(`Hoorayyy! got ${n} amount of fish 🐟`);
+        message.channel.send(`Hoorayyy! got ${n} fish 🐟`);
+        set(child(playersRef, memberId + "/inventory/fish"), increment(n))
       });
       
       collector.on('end', collected => {
-        console.log(`Collected ${collected.size} items`);
+        // console.log(`Collected ${collected.size} items`);
         if(collected.size == 0) {
           message.channel.send("The fish got away")
         }

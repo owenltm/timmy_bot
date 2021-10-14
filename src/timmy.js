@@ -36,6 +36,11 @@ const timmy = {
     how     : "profile",
     fun     : functions.profile
   },
+  "inventory" : {
+    desc    : "View inventory on timmy's world",
+    how     : "inventory",
+    fun     : functions.inventory
+  },
   "quest" : {
     desc    : "See available quest",
     how     : "quest [take <quest number>]",

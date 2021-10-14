@@ -43,7 +43,7 @@ const keys = Object.keys(types);
 const register = (message) => {
 
   const guildId = message.guild.id;
-  const memberId = message.member.id
+  const memberId = message.member.id;
 
   const playerRef = ref(database, guildId + "/players/" + memberId)
 
@@ -62,7 +62,7 @@ const register = (message) => {
         id: memberId,
         type: types[r.emoji.name].name,
         level: 1,
-        coin: 100,
+        coin: 75,
         createdAt: Date.now(),
         stat: types[r.emoji.name].stat,
       }).then(() => {
