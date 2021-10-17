@@ -1,5 +1,5 @@
 const { database } = require("../../firebase/database");
-const { ref, set, get, push, remove, child } = require ('firebase/database');
+const { ref, child, get } = require ('firebase/database');
 
 const { MessageEmbed } = require('discord.js');
 

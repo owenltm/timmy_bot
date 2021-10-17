@@ -7,10 +7,10 @@ const inventory = async (message, args) => {
   const guildId = message.guild.id;
   const memberId = message.member.id;
 
-  const playerRef = ref(database, guildId + "/players/" + memberId);
-  const invenRef = child(playerRef, "inventory");
+  const memberRef = ref(database, guildId + "/players/" + memberId);
+  const invenRef = child(memberRef, "inventory");
 
-  const snapshot = await get(playerRef);
+  const snapshot = await get(memberRef);
   if(!snapshot.exists()){
     message.reply("You are not registered\nyou can register using `T-register`");
     return;
