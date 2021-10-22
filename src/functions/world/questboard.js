@@ -38,10 +38,8 @@ const questboard = async (message, args) => {
     get(questRef).then((snapshot) => {
       const quest = snapshot.val();
 
-      console.log(quest);
-
       // add quest to member
-      // push(child(memberRef, "quest"), quest).then(() => remove(questRef));
+      push(curQuestsRef, quest).then(() => remove(questRef));
     });
   }
 }

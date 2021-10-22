@@ -33,7 +33,7 @@ const timmy = {
   },
   "profile" : {
     desc    : "View profile on timmy's world",
-    how     : "profile",
+    how     : "profile [quest|inventory]",
     fun     : functions.profile
   },
   "inventory" : {
@@ -41,9 +41,14 @@ const timmy = {
     how     : "inventory",
     fun     : functions.inventory
   },
+  "quest" : {
+    desc    : "View currently going quest",
+    how     : "quest [take <quest number>]",
+    fun     : functions.quest
+  },
   "questboard" : {
     desc    : "See available quest",
-    how     : "quest [take <quest number>]",
+    how     : "questboard [take <quest number>]",
     fun     : functions.questboard
   },
   "fishing" : {

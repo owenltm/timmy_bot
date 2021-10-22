@@ -9,11 +9,6 @@ const profile = async(message, args) => {
 
   const {curPlayerRef} = getReferences(guildId, memberId);
 
-  // const playersRef = ref(database, guildId + "/players/");
-  // const questsRef = ref(database, guildId + "/quests/");
-
-  // const memberRef = child(playersRef,  memberId);
-
   const snapshot = await get(curPlayerRef);
   if(!snapshot.exists()){
     message.reply("You are not registered\nyou can register using `T-register`");
@@ -38,11 +33,38 @@ const profile = async(message, args) => {
       );          
 
     message.channel.send(profileEmbed);
-  } else if (args[0] == 'quest'){
+  } /* else if (args[0] == 'quest'){
+    const questEmbed = new MessageEmbed().setTitle(`${message.member.displayName}'s quest`);
 
+    get(curQuestsRef).then((snapshot) => {
+      const quests = snapshot.val()
+
+      for(key in quests){
+        const q = quests[key];
+
+        questEmbed.addField(`${q.from}: ${q.goal}`,  `${q.reward} Coins`, false)
+      }
+
+      message.channel.send(questEmbed);
+    })
   } else if (args[0] == "inventory"){
+    const invenEmbed = new MessageEmbed().setTitle(`${message.member.displayName}'s inventory`);
 
-  }
+    get(curInventoryRef).then((snapshot) => {
+      if(snapshot.exists()){
+        const data = snapshot.val();
+        const keys = Object.keys(data);
+
+        keys.forEach((key) => {
+          invenEmbed.addField(key, data[key], true);
+        });
+      } else {
+        invenEmbed.addField("\u200B", "Inventory is empty");
+      }
+
+      message.channel.send(invenEmbed);
+    });
+  } */
 
 }
 

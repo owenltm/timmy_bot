@@ -24,7 +24,6 @@ const getReferences = (guildId, memberId) => {
 
 const helperFunctions = (guildId, memberId) => {
   const checkRegistered = async() => {
-
   }
 }
 

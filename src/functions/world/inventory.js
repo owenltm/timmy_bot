@@ -1,5 +1,5 @@
-const { database } = require("../../firebase/database");
-const { ref, set, get, push, remove, child, increment } = require ('firebase/database');
+const { getReferences } = require('./helper/WorldDB');
+const { get, } = require ('firebase/database');
 
 const { MessageEmbed } = require('discord.js');
 
@@ -7,18 +7,17 @@ const inventory = async (message, args) => {
   const guildId = message.guild.id;
   const memberId = message.member.id;
 
-  const memberRef = ref(database, guildId + "/players/" + memberId);
-  const invenRef = child(memberRef, "inventory");
+  const {curPlayerRef, curInventoryRef} = getReferences(guildId, memberId);
 
-  const snapshot = await get(memberRef);
+  const snapshot = await get(curPlayerRef);
   if(!snapshot.exists()){
     message.reply("You are not registered\nyou can register using `T-register`");
     return;
   }
 
-  const invenEmbed = new MessageEmbed().setTitle("Inventory");
+  const invenEmbed = new MessageEmbed().setTitle(`${message.member.displayName}'s inventory`);
 
-  get(invenRef).then((snapshot) => {
+  get(curInventoryRef).then((snapshot) => {
     if(snapshot.exists()){
       const data = snapshot.val();
       const keys = Object.keys(data);

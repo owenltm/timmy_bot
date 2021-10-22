@@ -7,7 +7,7 @@ module.exports = {
   register : require("./world/register"),
   profile : require("./world/profile"),
   inventory : require("./world/inventory"),
-  // quest : require("./world/quest"),
+  quest : require("./world/quest"),
   questboard : require("./world/questboard"),
   fishing : require("./world/fishing")
 }

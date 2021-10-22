@@ -15,15 +15,15 @@ const init = (message) => {
       goal: "Catch 5 fish",
       reward: 5,
       objective: {
-        "Fish": 5,
+        "fish": 5,
       }
     },
     {
       from: "Fisherman",
-      goal: "Catch 5 fish",
-      reward: 5,
+      goal: "Catch 10 fish",
+      reward: 7,
       objective: {
-        "Fish": 5,
+        "fish": 10,
       }
     }
   ];
