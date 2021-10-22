@@ -1,5 +1,5 @@
 const { getReferences } = require('./helper/WorldDB');
-const { get, query, limitToFirst, limitToLast } = require('firebase/database');
+const { get, set, remove, child, increment } = require('firebase/database');
 
 const { MessageEmbed } = require('discord.js');
 
@@ -8,7 +8,7 @@ const questboard = async (message, args) => {
   const guildId = message.guild.id;
   const memberId = message.member.id;
 
-  const { curPlayerRef, curQuestsRef, questboardRef } = getReferences(guildId, memberId);
+  const { curPlayerRef, curQuestsRef, curInventoryRef } = getReferences(guildId, memberId);
 
   const snapshot = await get(curPlayerRef);
   if(!snapshot.exists()){
@@ -34,13 +34,37 @@ const questboard = async (message, args) => {
   } else if (args[0] == "submit") {
     const questId = args[1] - 1;
 
-    const query1 = query(curQuestsRef, limitToFirst(2));
-    const query2 = query(query1, limitToLast(1));
-
-    get(query2).then((snapshot) => {
+    get(curQuestsRef).then((snapshot) => {
       const quests = snapshot.val();
-      
-      console.log(quests);
+      const questKeys = Object.keys(quests);
+      const key = questKeys[questId]; //get quest key
+
+      const curQuest = quests[key];
+      const objective = curQuest.objective;
+
+      const objKey = Object.keys(objective); //get objective items
+
+      get(curInventoryRef).then((snapshot) => {
+        const inventory = snapshot.val();
+        var valid = true;
+
+        objKey.forEach(key => {
+          //compare objective items in inventory
+          valid = inventory[key] >= objective[key];
+        });
+
+        // console.log(valid);
+        if(valid){
+          objKey.forEach(key => {
+            set(child(curInventoryRef, key), increment(0 - objective[key]));
+          });
+
+          set(child(curPlayerRef, "coin"), increment(curQuest.reward));
+          remove(child(curQuestsRef, key))
+        } else {
+          message.reply("You haven't complete the quest yet");
+        }
+      });
     });
   }
 }

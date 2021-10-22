@@ -1,5 +1,5 @@
 const { getReferences } = require('./helper/WorldDB');
-const { ref, set, get, push, remove, child } = require('firebase/database');
+const { get, push, remove, child } = require('firebase/database');
 
 const { MessageEmbed } = require('discord.js');
 
