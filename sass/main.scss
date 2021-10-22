@@ -2,9 +2,11 @@
 
 // Custom colors
 $primary: #CEFA05;
-$secondary: #A7AB94;
-$info: #465041;
+$light: #A7AB94;
+$secondary: #465041;
+$info: #161915;
 $dark: #1D211B;
+
 
 // Custom font
 $font-family-montserrat: 'Montserrat', sans-serif;
@@ -26,6 +28,19 @@ $utilities: map-merge(
     ),
   )
 );
+
+$custom-theme-colors: (
+  "altdark": #161915,
+);
+
+$theme-colors: map-merge($theme-colors, $custom-theme-colors);
+
+section::before {
+  // OFFSETTING because of navbar
+  height: 56px;
+  content: "";
+  display:block;
+}
 
 // import bootstrap
 @import "../node_modules/bootstrap/scss/bootstrap";

@@ -9,10 +9,10 @@
 
   <link rel="stylesheet" href="./css/main.min.css">
 </head>
-<body class="bg-dark font-montserrat text-secondary">
+<body class="bg-dark font-montserrat text-light">
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow-sm">
+  <nav id="navbar" class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark shadow-sm">
     <div class="container-md">
       <span class="navbar-brand mb-0 h1 fw-bold">
         <img src="./assets/img/icon.png" alt="" width="30" height="30" class="d-inline-block align-text-middle me-1">
@@ -23,14 +23,14 @@
       </button>
       <div class="collapse ms-5 navbar-collapse justify-content-between" id="navbarNav">
         <ul class="navbar-nav">
+          <!-- <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#about">About</a>
+          </li> -->
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">About</a>
+            <a class="nav-link" href="#commands">Commands</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Commands</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">FAQ</a>
+            <a class="nav-link" href="#faq">FAQ</a>
           </li>
         </ul>
         <ul class="navbar-nav">
@@ -50,7 +50,7 @@
           <p class="lead">Have fun with Timmy and his mini-games</p>
           <div class="d-flex">
             <button type="button" class="btn btn-primary fw-bold me-3">Invite Timmy</button>
-            <button type="button" class="btn btn-info fw-bold">What can Timmy do ?</button>
+            <button type="button" class="btn btn-secondary fw-bold">What can Timmy do ?</button>
           </div>
         </div>
         <div class="col-4">
@@ -60,16 +60,42 @@
     </div>
   </div>
 
-  <section id="about" class="vh-100">
-    <h1>about</h1>
+  <!-- <section id="about" class="py-3">
+    <div class="container">
+      <h2 class="text-white">About Timmy</h2>
+      <p></p>
+    </div>
+  </section> -->
+
+  <section id="commands" class="py-3">
+    <div class="container">
+      <h2 class="text-white mb-3">Commands</h2>
+      <div class="row">
+        <div class="col-6">
+          <div class="container-fluid bg-info rounded align-items-center py-3 mb-3">
+            <p class="m-0 align-center"><span class="fw-bold fs-5">whatcanyoudo</span> - Ask what can Timmy do</p>
+          </div>
+        </div><div class="col-6">
+          <div class="container-fluid bg-info rounded align-items-center py-3 mb-3">
+            <p class="m-0 align-center"><span class="fw-bold fs-5">Introduce</span> - Let timmy to introduce himself</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="container-fluid bg-info rounded align-items-center py-3 mb-3">
+            <p class="m-0 align-center"><span class="fw-bold fs-5">property</span> - Ask timmy to flip a coin</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="container-fluid bg-info rounded align-items-center py-3 mb-3">
+            <p class="m-0 align-center"><span class="fw-bold fs-5">rockpaperscissors</span> - Play rock paper scissors with Timmy</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section id="commands" class="vh-100">
-    <h1>commands</h1>
-  </section>
-
-  <section id="faq" class="vh-100">
-    <h1>faq</h1>
+  <section id="faq">
+    
   </section>
   
   <!-- Bootstrap -->
