@@ -1,4 +1,4 @@
-const { database } = require("../../firebase/database");
+const { getReferences } = require('./helper/WorldDB');
 const { ref, child, get } = require ('firebase/database');
 
 const { MessageEmbed } = require('discord.js');
@@ -7,13 +7,14 @@ const profile = async(message, args) => {
   const guildId = message.guild.id;
   const memberId = message.member.id;
 
-  const playersRef = ref(database, guildId + "/players/");
-  const questsRef = ref(database, guildId + "/quests/");
+  const {curPlayerRef} = getReferences(guildId, memberId);
 
-  // const memberRef = ref(database, guildId + "/players/" + memberId);
-  const memberRef = child(playersRef,  memberId);
+  // const playersRef = ref(database, guildId + "/players/");
+  // const questsRef = ref(database, guildId + "/quests/");
 
-  const snapshot = await get(memberRef);
+  // const memberRef = child(playersRef,  memberId);
+
+  const snapshot = await get(curPlayerRef);
   if(!snapshot.exists()){
     message.reply("You are not registered\nyou can register using `T-register`");
     return;
@@ -22,9 +23,6 @@ const profile = async(message, args) => {
   if(args[0] == null){
     const player = snapshot.val();
     const stats = player.stat;
-    const quests = player.quest;
-
-    // console.log(quests);
 
     const profileEmbed = new MessageEmbed().setTitle("Profile")
       .addField('Name', message.member.displayName, false)
@@ -42,7 +40,7 @@ const profile = async(message, args) => {
     message.channel.send(profileEmbed);
   } else if (args[0] == 'quest'){
 
-  } else if (args[0] == inven){
+  } else if (args[0] == "inventory"){
 
   }
 

@@ -21,6 +21,4 @@ const getData = () => {
 
 module.exports = {
   database,
-  setData,
-  getData
 }

@@ -1,11 +1,11 @@
-const { database } = require("../../firebase/database");
+const { getReferences } = require('./helper/WorldDB');
 const { ref, set, get, push, remove, child, increment } = require ('firebase/database');
 
 const fishing = async(message) => {
   const guildId = message.guild.id;
   const memberId = message.member.id;
 
-  const playersRef = ref(database, guildId + "/players/");
+  const {playersRef, curPlayerRef, curInventoryRef} = getReferences(guildId, memberId);
 
   const snapshot = await get(child(playersRef, memberId + ""))
   if(!snapshot.exists()){
@@ -16,6 +16,8 @@ const fishing = async(message) => {
   message.reply("Casting line..., be ready for the fish").then((msg) => {
 
     const delay = Math.floor(Math.random() * 30000) + 1000;
+
+    // add react after delay
     setTimeout(function() {
       msg.react('🐟');
 
@@ -28,7 +30,7 @@ const fishing = async(message) => {
 
         const n = Math.floor(Math.random() * 2) + 1;
         message.channel.send(`Hoorayyy! got ${n} fish 🐟`);
-        set(child(playersRef, memberId + "/inventory/fish"), increment(n))
+        set(child(curInventoryRef, "fish"), increment(n))
       });
       
       collector.on('end', collected => {

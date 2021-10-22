@@ -1,4 +1,4 @@
-const { database, setData } = require("../../firebase/database");
+const { getReferences } = require('./helper/WorldDB');
 const { ref, set, get } = require ('firebase/database');
 
 const types = {
@@ -38,14 +38,12 @@ const types = {
 
 const keys = Object.keys(types);
 
-
-
 const register = (message) => {
 
   const guildId = message.guild.id;
   const memberId = message.member.id;
 
-  const playerRef = ref(database, guildId + "/players/" + memberId)
+  const { curPlayerRef } = getReferences(guildId, memberId);
 
   message.reply("Choose your start class").then((msg) => {
     // put reaction option
@@ -58,7 +56,7 @@ const register = (message) => {
       console.log(`Collected ${r.emoji.name}`);
 
       // Set starting values
-      set(playerRef, {
+      set(curPlayerRef, {
         id: memberId,
         type: types[r.emoji.name].name,
         level: 1,
@@ -67,6 +65,8 @@ const register = (message) => {
         stat: types[r.emoji.name].stat,
       }).then(() => {
         message.channel.send(`Welcome new player ${r.emoji.name}${message.member.displayName}.Welcome to Timmy's World!`)
+      }).catch(err => {
+        console.error(err)
       })
     });
     collector.on('end', collected => console.log(`Collected ${collected.size} items`));
