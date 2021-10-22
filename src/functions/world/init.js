@@ -5,8 +5,8 @@ const { ref, set, get, push } = require ('firebase/database');
 const init = (message) => {
   const guildId = message.guild.id;
 
-  const guildRef = ref(database, guildId)
-  const questsRef = ref(database, guildId + "/quests/")
+  const guildRef = ref(database, guildId);
+  const questboardRef = ref(database, guildId + "/questboard/");
 
   // TODO: Create function to generate quests every N time
   const quests = [
@@ -28,9 +28,9 @@ const init = (message) => {
     }
   ];
 
-  set(questsRef, quests).then(() => {
+  set(questboardRef, quests).then(() => {
     message.channel.send("Updated");
-  })
+  });
 
 }
 

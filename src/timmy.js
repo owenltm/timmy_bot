@@ -41,10 +41,10 @@ const timmy = {
     how     : "inventory",
     fun     : functions.inventory
   },
-  "quest" : {
+  "questboard" : {
     desc    : "See available quest",
     how     : "quest [take <quest number>]",
-    fun     : functions.quest
+    fun     : functions.questboard
   },
   "fishing" : {
     desc    : "Go fishing",
