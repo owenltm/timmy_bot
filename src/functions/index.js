@@ -2,6 +2,7 @@ module.exports = {
   introduce : require("./introduce"),
   flipacoin : require("./flipacoin"),
   rockpaperscissors : require("./rockpaperscissors"),
+  diceroll : require("./diceroll"),
   // World
   init : require("./world/init"),
   register : require("./world/register"),

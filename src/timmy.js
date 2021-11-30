@@ -20,6 +20,11 @@ const timmy = {
     how     : "rockpaperscissors [rock/paper/scissors]",
     fun     : functions.rockpaperscissors 
   },
+  "diceroll" : {
+    desc    : "Ask timmy to roll dice(s)",
+    how     : "diceroll [dice number]",
+    fun     : functions.diceroll 
+  },
   // World
   "init" : {
     desc    : "Initialize timmy's world",
@@ -27,7 +32,7 @@ const timmy = {
     fun     : functions.init
   },
   "register" : {
-    desc    : "Register to play timmy's world",
+    desc    : "Register to play in timmy's world",
     how     : "register",
     fun     : functions.register
   },
