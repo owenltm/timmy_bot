@@ -1,4 +1,4 @@
-const { getReferences } = require('./helper/WorldDB');
+const { worldDB } = require('./helper/WorldDB');
 const { ref, child, get } = require ('firebase/database');
 
 const { MessageEmbed } = require('discord.js');
@@ -7,15 +7,19 @@ const profile = async(message, args) => {
   const guildId = message.guild.id;
   const memberId = message.member.id;
 
-  const {curPlayerRef} = getReferences(guildId, memberId);
+  // const {curPlayerRef} = getReferences(guildId, memberId);
+  const {getReferences, helperFunctions} = worldDB(guildId, memberId);
+  const { curPlayerRef } = getReferences();
+  const { checkRegistered } = helperFunctions();
 
-  const snapshot = await get(curPlayerRef);
-  if(!snapshot.exists()){
+  const login = await checkRegistered()
+    if(!login){
     message.reply("You are not registered\nyou can register using `T-register`");
     return;
   }
 
   if(args[0] == null){
+    const snapshot = await get(curPlayerRef);
     const player = snapshot.val();
     const stats = player.stat;
 
