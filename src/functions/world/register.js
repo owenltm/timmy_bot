@@ -1,4 +1,4 @@
-const { getReferences } = require('./helper/WorldDB');
+const { worldDB } = require('./helper/WorldDB');
 const { ref, set, get } = require ('firebase/database');
 
 const types = {
@@ -43,7 +43,8 @@ const register = (message) => {
   const guildId = message.guild.id;
   const memberId = message.member.id;
 
-  const { curPlayerRef } = getReferences(guildId, memberId);
+  const { getReferences } = worldDB(guildId, memberId)
+  const { curPlayerRef } = getReferences();
 
   message.reply("Choose your start class").then((msg) => {
     // put reaction option

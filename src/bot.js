@@ -55,7 +55,7 @@ client.on('message', (message) => {
 
       cmd.fun(message, args);
     } else {
-      message.channel.send("Sorry, i don't know hot to respond to that :(")
+      message.channel.send("Sorry, i don't know how to respond to that :(")
     }
   }
 });

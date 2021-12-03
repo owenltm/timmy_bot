@@ -1,18 +1,20 @@
-const { getReferences } = require('./helper/WorldDB');
+const { getReferences, worldDB } = require('./helper/WorldDB');
 const { ref, set, get, push, remove, child, increment } = require ('firebase/database');
 
 const fishing = async(message) => {
   const guildId = message.guild.id;
   const memberId = message.member.id;
 
-  const {playersRef, curPlayerRef, curInventoryRef} = getReferences(guildId, memberId);
+  const { getReferences, helperFunctions } = worldDB(guildId, memberId);
+  const {playersRef, curPlayerRef, curInventoryRef} = getReferences();
+  const { checkRegistered } = helperFunctions();
 
-  const snapshot = await get(child(playersRef, memberId + ""))
-  if(!snapshot.exists()){
+  const login = await checkRegistered()
+  if(!login){
     message.reply("You are not registered\nyou can register using `T-register`");
     return;
   }
-
+  
   message.reply("Casting line..., be ready for the fish").then((msg) => {
 
     const delay = Math.floor(Math.random() * 30000) + 1000;

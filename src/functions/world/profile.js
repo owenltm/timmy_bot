@@ -13,7 +13,7 @@ const profile = async(message, args) => {
   const { checkRegistered } = helperFunctions();
 
   const login = await checkRegistered()
-    if(!login){
+  if(!login){
     message.reply("You are not registered\nyou can register using `T-register`");
     return;
   }

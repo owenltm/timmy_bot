@@ -1,4 +1,4 @@
-const { getReferences } = require('./helper/WorldDB');
+const { worldDB } = require('./helper/WorldDB');
 const { get, push, remove, child } = require('firebase/database');
 
 const { MessageEmbed } = require('discord.js');
@@ -8,28 +8,33 @@ const questboard = async (message, args) => {
   const guildId = message.guild.id;
   const memberId = message.member.id;
 
-  const { playersRef, questboardRef, curPlayerRef, curQuestsRef } = getReferences(guildId, memberId);
+  const {getReferences, helperFunctions} = worldDB(guildId, memberId);
+  const { playersRef, questboardRef, curPlayerRef, curQuestsRef } = getReferences();
+  const { checkRegistered } = helperFunctions();
 
-  const snapshot = await get(child(playersRef, memberId + ""))
-  if(!snapshot.exists()){
+  const login = await checkRegistered()
+  if(!login){
     message.reply("You are not registered\nyou can register using `T-register`");
     return;
   }
 
   if(args[0] == null){
     get(questboardRef).then((snapshot) => {
-      if(snapshot.exists){
+      const questEmbed = new MessageEmbed()
+      .setTitle('List of quest');
+
+      if(snapshot.exists()){
         const val = snapshot.val();
-        
-        const questEmbed = new MessageEmbed()
-        .setTitle('List of quest');
 
         val.forEach((quest, id) => {
           questEmbed.addField(`${id + 1}. ${quest.from}: ${quest.goal}`, `${quest.reward} Coins`, false);
         });
 
-        message.channel.send(questEmbed);
+      } else {
+        questEmbed.setDescription('There are no quest at the moment');
       }
+
+      message.channel.send(questEmbed);
     }).catch((err) => console.error(err))
   } else if (args[0] == "take") {
     const questId = args[1] - 1;

@@ -1,4 +1,4 @@
-const { getReferences } = require('./helper/WorldDB');
+const { worldDB, getReferences } = require('./helper/WorldDB');
 const { get, set, remove, child, increment } = require('firebase/database');
 
 const { MessageEmbed } = require('discord.js');
@@ -8,10 +8,12 @@ const questboard = async (message, args) => {
   const guildId = message.guild.id;
   const memberId = message.member.id;
 
-  const { curPlayerRef, curQuestsRef, curInventoryRef } = getReferences(guildId, memberId);
+  const { getReferences, helperFunctions } = worldDB(guildId, memberId);
+  const { curPlayerRef, curQuestsRef, curInventoryRef } = getReferences();
+  const { checkRegistered } = helperFunctions();
 
-  const snapshot = await get(curPlayerRef);
-  if(!snapshot.exists()){
+  const login = await checkRegistered()
+  if(!login){
     message.reply("You are not registered\nyou can register using `T-register`");
     return;
   }
