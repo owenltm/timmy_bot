@@ -1,4 +1,4 @@
-const { worldDB, getReferences } = require('./helper/WorldDB');
+const { worldDB } = require('./helper/WorldDB');
 const { get, set, remove, child, increment } = require('firebase/database');
 
 const { MessageEmbed } = require('discord.js');

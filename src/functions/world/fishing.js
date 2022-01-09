@@ -1,4 +1,4 @@
-const { getReferences, worldDB } = require('./helper/WorldDB');
+const { worldDB } = require('./helper/WorldDB');
 const { ref, set, get, push, remove, child, increment } = require ('firebase/database');
 
 const fishing = async(message) => {
@@ -14,7 +14,7 @@ const fishing = async(message) => {
     message.reply("You are not registered\nyou can register using `T-register`");
     return;
   }
-  
+
   message.reply("Casting line..., be ready for the fish").then((msg) => {
 
     const delay = Math.floor(Math.random() * 30000) + 1000;

@@ -25,6 +25,12 @@ const timmy = {
     how     : "diceroll [dice number]",
     fun     : functions.diceroll 
   },
+  //music
+  "play" : {
+    desc    : "Flip Flop",
+    how     : "play [url]",
+    fun     : functions.play
+  },
   // World
   "init" : {
     desc    : "Initialize timmy's world",
@@ -60,6 +66,11 @@ const timmy = {
     desc    : "Go fishing",
     how     : "fishing",
     fun     : functions.fishing
+  },
+  "duel" : {
+    desc    : "Ask other player for a duel",
+    how     : "duel [challenge <player name> <bet> | accept]",
+    fun     : functions.duel
   }
 };
 
