@@ -1,4 +1,4 @@
-const diceroll = (message, args) => {
+const diceroll = (interaction, args) => {
 
   let value = 1;
   // console.log(args.length);
@@ -13,7 +13,7 @@ const diceroll = (message, args) => {
     }
   }
 
-  message.channel.send(value);
+  interaction.reply(value);
 }
 
 module.exports = diceroll

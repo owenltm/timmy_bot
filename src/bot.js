@@ -1,63 +1,43 @@
 // ENTRY POINT
 require('dotenv').config();
 
-const { Client } = require('discord.js');
-const client = new Client();
-const PREFIX = "T-";
-
-const timmy = require('./timmy');
-
-client.on('ready', () => {
-  console.log(`${client.user.tag} has logged in`);
-
-  client.user.setActivity('T-help', { type: 'LISTENING' })
-  .catch(console.error);
+const { Client, Collection, Events, GatewayIntentBits, ActivityType } = require('discord.js');
+const timmy = require("./timmy");
+const client = new Client({
+  intents: [GatewayIntentBits.Guilds]
 });
 
-client.on('message', (message) => {
-  if(message.author.bot) return;
+client.commands = new Collection();
 
-  if(message.content === "Timmy"){
-    message.channel.send("Ask ***T-whatcanyoudo*** *wink *wink");
-  }
-  
-  if(message.content.startsWith(PREFIX)){
-    const [CMD_NAME, ...args] = message.content.trim().substring(PREFIX.length).split(/\s+/);
+client.once(Events.ClientReady, () => {
+  console.log(`${client.user.tag} has logged in`);
 
-    // console.log(CMD_NAME);
-    // console.log(args);
+  client.user.setActivity('T-help', { type: ActivityType.Playing })
 
-    if(CMD_NAME === "whatcanyoudo"){
-      
-      var result = "";
-      
-      const keys = Object.keys(timmy);
+  Object.keys(timmy).forEach(key => {
+    client.commands.set(timmy[key].data.name, timmy[key].fun);
+  });
+});
 
-      keys.forEach((keys) => {
-        result += `**${keys}** - ${timmy[keys].desc}\n`;
-      });
+client.on(Events.InteractionCreate, async (interaction) => {
+  if (!interaction.isChatInputCommand()) return;
 
-      message.channel.send(result);
-    } else if(CMD_NAME === "howto"){
-      if(args.length == 1){
-        const key = args[0];
-        if(timmy[key]){
-          message.channel.send(`For ${key} do *${PREFIX}${timmy[key].how}*`);
-        } else {
-          message.channel.send("Sorry, i dont know how to do that :(");
-        }
-      }
-    } else if(CMD_NAME === "goodbye"){
-      message.channel.send("Goodbye").then((message) => client.destroy());
-      
-    } else if(timmy[CMD_NAME]){
-      const cmd = timmy[CMD_NAME];
+  const command = interaction.client.commands.get(interaction.commandName);
 
-      cmd.fun(message, args);
-    } else {
-      message.channel.send("Sorry, i don't know how to respond to that :(")
-    }
-  }
+	if (!command) {
+		return;
+	}
+
+	try {
+		await command(interaction);
+	} catch (error) {
+		console.error(error);
+		if (interaction.replied || interaction.deferred) {
+			await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+		} else {
+			await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		}
+	}
 });
 
 // Connect to discord

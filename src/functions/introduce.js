@@ -1,5 +1,5 @@
-const introduce = (message) => {
-  message.channel.send("Hi, my name is Timmy. I'm a discord bot.Nice to see you guys :D");
+const introduce = (interaction) => {
+  interaction.reply("Hi, my name is Timmy. I'm a discord bot.Nice to see you guys :D");
 }
 
 module.exports = introduce;
